@@ -19,7 +19,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 
 def train_model(X_train, X_test, y_train, y_test):
-    # load preprocessor (to register alongside model)
+    logger.info("Starting model training")
+    # Load preprocessor (to register alongside model)
     preprocessor = load_object(PREPROCESSOR_PATH)
 
     models = {
@@ -36,29 +37,41 @@ def train_model(X_train, X_test, y_train, y_test):
         "DecisionTree": {"criterion": ["gini", "entropy"]},
         "Logistic": {},
     }
+# import dagshub
+# dagshub.init(repo_owner='Excalibuurr', repo_name='phishing_detection', mlflow=True)
 
+# Alternatively manually set the tracking URI to DagsHub using .env variables
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-    mlflow.set_experiment("NetworkSecurityPipeline")
+    mlflow.set_experiment("PhishingDetectionExperiment")
 
     best_name, best_model, best_score = None, None, -1
     report = evaluate_models(X_train, y_train, X_test, y_test, models, params)
 
     for name, info in report.items():
         f1 = info["f1_score"]
+        precision = info["precision"]
+        recall = info["recall"]       
         model = info["model"]
         with mlflow.start_run(run_name=name):
             mlflow.log_param("model", name)
             mlflow.log_metric("f1_score", f1)
+            mlflow.log_metric("precision", precision)
+            mlflow.log_metric("recall", recall)
             mlflow.sklearn.log_model(model, artifact_path="model")
         if f1 > best_score:
             best_score, best_model, best_name = f1, model, name
 
-    # save best locally
+    # Save best model locally and log to MLflow
     os.makedirs(MODEL_DIR, exist_ok=True)
-    mlflow.sklearn.log_model(best_model, "best_model")
-    mlflow.log_metric("best_f1", best_score)
-    mlflow.end_run()
-    mlflow.sklearn.save_model(best_model, MODEL_FILE_PATH)
+    import shutil
+    with mlflow.start_run(run_name="BestModel_" + best_name):
+        mlflow.log_param("model", best_name)
+        mlflow.log_metric("best_f1", best_score)
+        mlflow.sklearn.log_model(best_model, "best_model")
+        if os.path.exists(MODEL_FILE_PATH):
+            shutil.rmtree(MODEL_FILE_PATH)
+        mlflow.sklearn.save_model(best_model, MODEL_FILE_PATH)
     logger.info(f"Best model ({best_name}) saved to {MODEL_FILE_PATH} with F1={best_score:.4f}")
+    logger.info("Model training completed")
 
     return best_name, best_score

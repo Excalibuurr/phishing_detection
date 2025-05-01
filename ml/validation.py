@@ -11,8 +11,10 @@ def validate_schema(df: pd.DataFrame) -> None:
     expected = [list(item.keys())[0] for item in schema["columns"]]
     if list(df.columns) != expected:
         raise ValueError("Column mismatch with schema")
+    logger.info("Schema validation successful")
 
 def detect_drift(train_df: pd.DataFrame, test_df: pd.DataFrame, threshold=0.05):
+    logger.info("Starting drift detection")
     report = {}
     for col in train_df.columns:
         pval = ks_2samp(train_df[col], test_df[col]).pvalue
@@ -23,6 +25,7 @@ def detect_drift(train_df: pd.DataFrame, test_df: pd.DataFrame, threshold=0.05):
     drift_path = os.path.join(os.path.dirname(TEST_FILE_PATH), "drift_report.yaml")
     yaml.safe_dump(report, open(drift_path, "w"))
     logger.info(f"Drift report saved to {drift_path}")
+    logger.info("Drift detection completed")
     return report
 
 def validate_data():

@@ -14,6 +14,7 @@ from ml.config import (
 from ml.utils import save_object, save_numpy, logger
 
 def transform_data():
+    logger.info("Starting data transformation")
     train = pd.read_csv(TRAIN_FILE_PATH)
     test = pd.read_csv(TEST_FILE_PATH)
 
@@ -35,5 +36,6 @@ def transform_data():
     save_numpy(os.path.join(MODEL_DIR, "train.npy"), np.c_[X_train_tr, y_train.to_numpy()])
     save_numpy(os.path.join(MODEL_DIR, "test.npy"),  np.c_[X_test_tr,  y_test.to_numpy()])
     logger.info("Transformed arrays saved")
+    logger.info("Data transformation completed")
 
     return X_train_tr, X_test_tr, y_train, y_test

@@ -15,6 +15,7 @@ from ml.config import (
 from ml.utils import logger
 
 def ingest_data():
+    logger.info("Starting data ingestion")
     logger.info("Connecting to MongoDB")
     client = MongoClient(MONGO_DB_URL)
     coll = client[MONGO_DB_NAME][MONGO_COLLECTION]
@@ -37,5 +38,6 @@ def ingest_data():
     train_set.to_csv(TRAIN_FILE_PATH, index=False)
     test_set.to_csv(TEST_FILE_PATH, index=False)
     logger.info(f"Saved train to {TRAIN_FILE_PATH}, test to {TEST_FILE_PATH}")
+    logger.info("Data ingestion completed")
 
     return RAW_FILE_PATH, TRAIN_FILE_PATH, TEST_FILE_PATH

@@ -8,10 +8,15 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import f1_score, precision_score, recall_score
 from ml.config import LOG_FILE_PATH
 
+import datetime
+
 def setup_logger():
-    os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
+    log_dir = os.path.dirname(LOG_FILE_PATH)
+    os.makedirs(log_dir, exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f"log_{timestamp}.txt")
     logging.basicConfig(
-        filename=LOG_FILE_PATH,
+        filename=log_file,
         level=logging.INFO,
         format="[%(asctime)s] %(levelname)s - %(message)s",
     )
@@ -45,5 +50,7 @@ def evaluate_models(X_train, y_train, X_test, y_test, models: dict, params: dict
         best = grid.best_estimator_
         preds = best.predict(X_test)
         f1 = f1_score(y_test, preds)
-        report[name] = {"model": best, "f1_score": f1}
+        precision = precision_score(y_test, preds)
+        recall = recall_score(y_test, preds)
+        report[name] = {"model": best, "f1_score": f1, "precision": precision, "recall": recall}
     return report

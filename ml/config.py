@@ -16,7 +16,7 @@ SCHEMA_FILE_PATH     = os.path.join(BASE_DIR, "config", "schema.yaml")
 
 # Models & Preprocessor
 MODEL_DIR            = os.path.join(BASE_DIR, "models")
-MODEL_FILE_PATH      = os.path.join(MODEL_DIR, "model.pkl")
+MODEL_FILE_PATH      = os.path.join(MODEL_DIR, "best_model")
 PREPROCESSOR_PATH    = os.path.join(MODEL_DIR, "preprocessor.pkl")
 
 # Logs

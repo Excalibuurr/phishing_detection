@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 venv
 .env
 /logs
 __pycache__/
 
 
+=======
+>>>>>>> 3ec8b0579d910cea0ba7aa927b54bf243d46b4c7
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -177,4 +180,8 @@ cython_debug/
 .ruff_cache/
 
 # PyPI configuration file
+<<<<<<< HEAD
 .pypirc
+=======
+.pypirc
+>>>>>>> 3ec8b0579d910cea0ba7aa927b54bf243d46b4c7

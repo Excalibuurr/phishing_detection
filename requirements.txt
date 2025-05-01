@@ -1,0 +1,10 @@
+pymongo
+pandas
+numpy
+scikit-learn
+pyyaml
+mlflow
+dagshub
+python-dotenv
+joblib
+scipy

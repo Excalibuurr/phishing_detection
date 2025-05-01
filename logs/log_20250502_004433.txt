@@ -1,0 +1,55 @@
+[2025-05-02 00:44:36,892] INFO - === PIPELINE START ===
+[2025-05-02 00:44:36,892] INFO - Starting data ingestion
+[2025-05-02 00:44:36,893] INFO - Connecting to MongoDB
+[2025-05-02 00:44:44,044] INFO - Saved raw data to E:\Projects\phishing_detection\data\raw\raw_data.csv
+[2025-05-02 00:44:44,082] INFO - Saved train to E:\Projects\phishing_detection\data\processed\train.csv, test to E:\Projects\phishing_detection\data\processed\test.csv
+[2025-05-02 00:44:44,082] INFO - Data ingestion completed
+[2025-05-02 00:44:44,083] INFO - Starting data validation
+[2025-05-02 00:44:44,210] INFO - Validating schema for dataframe with columns: ['having_IP_Address', 'URL_Length', 'Shortining_Service', 'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix', 'having_Sub_Domain', 'SSLfinal_State', 'Domain_registeration_length', 'Favicon', 'port', 'HTTPS_token', 'Request_URL', 'URL_of_Anchor', 'Links_in_tags', 'SFH', 'Submitting_to_email', 'Abnormal_URL', 'Redirect', 'on_mouseover', 'RightClick', 'popUpWidnow', 'Iframe', 'age_of_domain', 'DNSRecord', 'web_traffic', 'Page_Rank', 'Google_Index', 'Links_pointing_to_page', 'Statistical_report', 'Result']
+[2025-05-02 00:44:44,218] INFO - Schema validation successful
+[2025-05-02 00:44:44,218] INFO - Validating schema for dataframe with columns: ['having_IP_Address', 'URL_Length', 'Shortining_Service', 'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix', 'having_Sub_Domain', 'SSLfinal_State', 'Domain_registeration_length', 'Favicon', 'port', 'HTTPS_token', 'Request_URL', 'URL_of_Anchor', 'Links_in_tags', 'SFH', 'Submitting_to_email', 'Abnormal_URL', 'Redirect', 'on_mouseover', 'RightClick', 'popUpWidnow', 'Iframe', 'age_of_domain', 'DNSRecord', 'web_traffic', 'Page_Rank', 'Google_Index', 'Links_pointing_to_page', 'Statistical_report', 'Result']
+[2025-05-02 00:44:44,226] INFO - Schema validation successful
+[2025-05-02 00:44:44,227] INFO - Schema validation passed
+[2025-05-02 00:44:44,227] INFO - Starting drift detection
+[2025-05-02 00:44:44,232] INFO - Drift detection for column 'having_IP_Address': p-value=0.9999999991050752, drift=False
+[2025-05-02 00:44:44,238] INFO - Drift detection for column 'URL_Length': p-value=0.9999998099738984, drift=False
+[2025-05-02 00:44:44,242] INFO - Drift detection for column 'Shortining_Service': p-value=0.9999654772410788, drift=False
+[2025-05-02 00:44:44,246] INFO - Drift detection for column 'having_At_Symbol': p-value=0.9999971010402764, drift=False
+[2025-05-02 00:44:44,250] INFO - Drift detection for column 'double_slash_redirecting': p-value=0.9993864328065777, drift=False
+[2025-05-02 00:44:44,259] INFO - Drift detection for column 'Prefix_Suffix': p-value=0.7634837477364733, drift=False
+[2025-05-02 00:44:44,262] INFO - Drift detection for column 'having_Sub_Domain': p-value=0.9999993831997822, drift=False
+[2025-05-02 00:44:44,265] INFO - Drift detection for column 'SSLfinal_State': p-value=0.9999989383967115, drift=False
+[2025-05-02 00:44:44,268] INFO - Drift detection for column 'Domain_registeration_length': p-value=0.998821814236978, drift=False
+[2025-05-02 00:44:44,272] INFO - Drift detection for column 'Favicon': p-value=0.7009958426886144, drift=False
+[2025-05-02 00:44:44,274] INFO - Drift detection for column 'port': p-value=1.0, drift=False
+[2025-05-02 00:44:44,277] INFO - Drift detection for column 'HTTPS_token': p-value=0.9999836499887566, drift=False
+[2025-05-02 00:44:44,281] INFO - Drift detection for column 'Request_URL': p-value=0.9925611176019148, drift=False
+[2025-05-02 00:44:44,289] INFO - Drift detection for column 'URL_of_Anchor': p-value=0.7481247116503471, drift=False
+[2025-05-02 00:44:44,295] INFO - Drift detection for column 'Links_in_tags': p-value=0.9985597993583677, drift=False
+[2025-05-02 00:44:44,298] INFO - Drift detection for column 'SFH': p-value=1.0, drift=False
+[2025-05-02 00:44:44,300] INFO - Drift detection for column 'Submitting_to_email': p-value=1.0, drift=False
+[2025-05-02 00:44:44,302] INFO - Drift detection for column 'Abnormal_URL': p-value=1.0, drift=False
+[2025-05-02 00:44:44,307] INFO - Drift detection for column 'Redirect': p-value=0.9999998996954222, drift=False
+[2025-05-02 00:44:44,310] INFO - Drift detection for column 'on_mouseover': p-value=0.9999760319468036, drift=False
+[2025-05-02 00:44:44,314] INFO - Drift detection for column 'RightClick': p-value=0.9982529381226167, drift=False
+[2025-05-02 00:44:44,323] INFO - Drift detection for column 'popUpWidnow': p-value=0.5498506384437393, drift=False
+[2025-05-02 00:44:44,329] INFO - Drift detection for column 'Iframe': p-value=0.8221844390977682, drift=False
+[2025-05-02 00:44:44,332] INFO - Drift detection for column 'age_of_domain': p-value=0.9999999883158472, drift=False
+[2025-05-02 00:44:44,335] INFO - Drift detection for column 'DNSRecord': p-value=0.9999999999990964, drift=False
+[2025-05-02 00:44:44,341] INFO - Drift detection for column 'web_traffic': p-value=0.998821814236978, drift=False
+[2025-05-02 00:44:44,344] INFO - Drift detection for column 'Page_Rank': p-value=1.0, drift=False
+[2025-05-02 00:44:44,348] INFO - Drift detection for column 'Google_Index': p-value=0.9999062353866229, drift=False
+[2025-05-02 00:44:44,353] INFO - Drift detection for column 'Links_pointing_to_page': p-value=0.9997752665277037, drift=False
+[2025-05-02 00:44:44,354] INFO - Drift detection for column 'Statistical_report': p-value=1.0, drift=False
+[2025-05-02 00:44:44,363] INFO - Drift detection for column 'Result': p-value=0.7009958426886144, drift=False
+[2025-05-02 00:44:44,369] INFO - Drift report saved to E:\Projects\phishing_detection\data\processed\drift_report.yaml
+[2025-05-02 00:44:44,369] INFO - Drift detection completed
+[2025-05-02 00:44:44,369] INFO - Data validation completed
+[2025-05-02 00:44:44,370] INFO - Starting data transformation
+[2025-05-02 00:44:44,425] INFO - Preprocessor saved to E:\Projects\phishing_detection\models\preprocessor.pkl
+[2025-05-02 00:44:44,432] INFO - Transformed arrays saved
+[2025-05-02 00:44:44,432] INFO - Data transformation completed
+[2025-05-02 00:44:44,433] INFO - Starting model training
+[2025-05-02 00:47:37,788] INFO - Best model (RandomForest) saved to E:\Projects\phishing_detection\models\best_model with F1=0.9710
+[2025-05-02 00:47:37,789] INFO - Model training completed
+[2025-05-02 00:47:37,791] INFO - === PIPELINE END: Best=RandomForest, F1=0.9710 ===

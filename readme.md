@@ -1,37 +1,50 @@
 # Network Security Phishing Detection Pipeline
 
-## Structure
-networksecurity_cleaned/
-├── config/
-│   └── schema.yaml
-│
-├── data/
-│   ├── raw/          
-│   └── processed/    
-│
+## Project Structure
+phishing_detection/
+├── app.py                     # FastAPI application for training and prediction APIs
+├── main.py                    # Script to run the full pipeline (training and preprocessing)
+├── predict.py                 # Prediction pipeline logic
+├── templates/
+│   ├── index.html             # HTML template for the web interface
+│   ├── table.html            # HTML template for displaying prediction results
 ├── ml/
-│   ├── config.py
-│   ├── utils.py
-│   ├── ingestion.py
-│   ├── validation.py
-│   ├── transformation.py
-│   └── training.py
-│
+│   ├── __init__.py            # Initialization file for the ml module
+│   ├── ingestion.py           # Data ingestion logic
+│   ├── validation.py          # Data validation logic
+│   ├── transformation.py      # Data transformation logic
+│   ├── training.py            # Model training logic
+│   ├── utils.py               # Utility functions (e.g., logging, object loading)
+│   ├── config.py              # Configuration file for paths and constants
 ├── models/
-│   ├── model.pkl
-│   └── preprocessor.pkl
-│
-├── logs/
-│   └── log.txt
-│
-├── main.py
-├── requirements.txt
-├── .env
-├── README.md
-└── Dockerfile
+│   ├── model.pkl              # Trained model file
+│   ├── preprocessor.pkl       # Preprocessor file
+├── predictions_output/
+│   ├── output.csv             # Output predictions from the prediction pipeline
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project documentation
+├── .env                       # Environment variables (e.g., MLflow tracking URI, MONGODB URI,etc.)
 
 
-
+## Project Flowchart
+User Interaction (Frontend)
+    ├── Upload CSV File (index.html)
+    ├── Trigger Prediction (/predict API)
+    └── Trigger Training (/train API)
+          ↓
+FastAPI Backend (app.py)
+    ├── /predict Route
+    │   ├── Calls predict_new_data() in predict.py
+    │   ├── Loads Model and Preprocessor
+    │   ├── Preprocesses Input Data
+    │   └── Returns Predictions
+    └── /train Route
+        ├── Calls Full Pipeline
+        │   ├── ingest_data() (ingestion.py)
+        │   ├── validate_data() (validation.py)
+        │   ├── transform_data() (transformation.py)
+        │   └── train_model() (training.py)
+        └── Saves Model and Preprocessor
 ## Setup
 
 1. **Clone** & `cd networksecurity_cleaned`
@@ -101,4 +114,24 @@ python predict.py
 Drift report available in drift_report.yaml.
 
 ## 📦 Deployment
-Deployment planned via FastAPI 
+Deployment planned via FastAPI and render
+
+## Flowchart to describe the flow of project
+User Interaction (Frontend)
+    ├── Upload CSV File (index.html)
+    ├── Trigger Prediction (/predict API)
+    └── Trigger Training (/train API)
+          ↓
+FastAPI Backend (app.py)
+    ├── /predict Route
+    │   ├── Calls predict_new_data() in predict.py
+    │   ├── Loads Model and Preprocessor
+    │   ├── Preprocesses Input Data
+    │   └── Returns Predictions
+    └── /train Route
+        ├── Calls Full Pipeline
+        │   ├── ingest_data() (ingestion.py)
+        │   ├── validate_data() (validation.py)
+        │   ├── transform_data() (transformation.py)
+        │   └── train_model() (training.py)
+        └── Saves Model and Preprocessor

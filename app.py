@@ -73,7 +73,7 @@ async def predict_route(request: Request, file: UploadFile = File(...)):
 
         # Convert to HTML and return template response
         table_html = result_df.to_html(classes='table table-striped')
-        return templates.TemplateResponse("table2.html", {"request": request, "table": table_html})
+        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
     except Exception as e:
         return Response(f"Prediction failed: {str(e)}", status_code=500)
 

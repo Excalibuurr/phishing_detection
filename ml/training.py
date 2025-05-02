@@ -70,23 +70,11 @@ def train_model(X_train, X_test, y_train, y_test):
         mlflow.log_param("model", best_name)
         mlflow.log_metric("best_f1", best_score)
         mlflow.sklearn.log_model(best_model, "best_model")
-        if os.path.exists(MODEL_FILE_PATH):
-            shutil.rmtree(MODEL_FILE_PATH)
-        mlflow.sklearn.save_model(best_model, MODEL_FILE_PATH)
+    model_dir = os.path.dirname(MODEL_FILE_PATH)
+    if os.path.exists(model_dir):
+        shutil.rmtree(model_dir)
+    mlflow.sklearn.save_model(best_model, MODEL_FILE_PATH)
     logger.info(f"Best model ({best_name}) saved to {MODEL_FILE_PATH} with F1={best_score:.4f}")
     logger.info("Model training completed")
 
-    return best_name, best_score
-
-def run_training_pipeline():
-    raw_path, train_path, test_path = ingest_data()
-    train_df = pd.read_csv(train_path)
-    test_df = pd.read_csv(test_path)
-
-    X_train = train_df.drop(columns=[TARGET_COLUMN])
-    y_train = train_df[TARGET_COLUMN]
-    X_test = test_df.drop(columns=[TARGET_COLUMN])
-    y_test = test_df[TARGET_COLUMN]
-
-    best_name, best_score = train_model(X_train, X_test, y_train, y_test)
     return best_name, best_score

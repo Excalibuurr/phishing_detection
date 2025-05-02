@@ -1,10 +1,12 @@
 import pandas as pd
-from ml.utils import load_object
+import mlflow.sklearn
 from ml.config import MODEL_FILE_PATH, PREPROCESSOR_PATH, VALID_FILE_PATH
+from ml.utils import load_object
 
 def predict_new_data(csv_path):
     # Load model and preprocessor
-    model = load_object(MODEL_FILE_PATH)
+    model_path_uri = "file://" + MODEL_FILE_PATH.replace("\\", "/")
+    model = mlflow.sklearn.load_model(model_path_uri)
     preprocessor = load_object(PREPROCESSOR_PATH)
 
     # Load and preprocess new data

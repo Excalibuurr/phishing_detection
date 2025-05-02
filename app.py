@@ -13,7 +13,11 @@ from fastapi.responses import Response
 from starlette.responses import RedirectResponse
 from uvicorn import run as app_run
 
-from ml.training import run_training_pipeline
+from ml.training import train_model
+from ml.transformation import transform_data
+from ml.ingestion import ingest_data
+from ml.validation import validate_data
+import pandas as pd
 from predict import predict_new_data
 
 app = FastAPI()
@@ -36,7 +40,12 @@ async def index():
 @app.get("/train")
 async def train_route():
     try:
-        best_name, best_score = run_training_pipeline()
+        # Run the full pipeline
+        raw_path, train_path, test_path = ingest_data()
+        drift_report = validate_data()
+        X_train, X_test, y_train, y_test = transform_data()
+        best_name, best_score = train_model(X_train, X_test, y_train, y_test)
+
         return Response(f"Training is successful. Best model: {best_name} with F1 score: {best_score:.4f}")
     except Exception as e:
         return Response(f"Training failed: {str(e)}", status_code=500)

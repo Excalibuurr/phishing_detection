@@ -7,4 +7,5 @@ mlflow
 dagshub
 python-dotenv
 joblib
-scipy
+fastapi
+# uvicorn/

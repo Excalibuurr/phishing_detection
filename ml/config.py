@@ -16,7 +16,7 @@ SCHEMA_FILE_PATH     = os.path.join(BASE_DIR, "config", "schema.yaml")
 
 # Models & Preprocessor
 MODEL_DIR            = os.path.join(BASE_DIR, "models")
-MODEL_FILE_PATH      = os.path.join(MODEL_DIR, "best_model")
+MODEL_FILE_PATH      = os.path.join(MODEL_DIR, "best_model", "model.pkl")
 PREPROCESSOR_PATH    = os.path.join(MODEL_DIR, "preprocessor.pkl")
 
 # Logs
@@ -41,3 +41,6 @@ TARGET_COLUMN       = "Result"
 MLFLOW_TRACKING_URI      = os.getenv("MLFLOW_TRACKING_URI")
 MLFLOW_TRACKING_USERNAME = os.getenv("MLFLOW_TRACKING_USERNAME")
 MLFLOW_TRACKING_PASSWORD = os.getenv("MLFLOW_TRACKING_PASSWORD")
+
+# valid file path
+VALID_FILE_PATH = os.path.join(BASE_DIR, "valid_data", "test.csv")

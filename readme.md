@@ -55,12 +55,6 @@ FastAPI Backend (app.py)
 3. `pip install -r requirements.txt`
 4. `python main.py`
 
-## Docker
-
-```bash
-docker build -t networksec-pipeline .
-docker run --env-file .env networksec-pipeline
-```
 
 ## 🚀 Setup Instructions
 
@@ -98,24 +92,4 @@ python predict.py
 Drift report available in drift_report.yaml.
 
 ## 📦 Deployment
-Deployment planned via FastAPI and render
-
-## Flowchart to describe the flow of project
-User Interaction (Frontend)
-    ├── Upload CSV File (index.html)
-    ├── Trigger Prediction (/predict API)
-    └── Trigger Training (/train API)
-          ↓
-FastAPI Backend (app.py)
-    ├── /predict Route
-    │   ├── Calls predict_new_data() in predict.py
-    │   ├── Loads Model and Preprocessor
-    │   ├── Preprocesses Input Data
-    │   └── Returns Predictions
-    └── /train Route
-        ├── Calls Full Pipeline
-        │   ├── ingest_data() (ingestion.py)
-        │   ├── validate_data() (validation.py)
-        │   ├── transform_data() (transformation.py)
-        │   └── train_model() (training.py)
-        └── Saves Model and Preprocessor
+Deployment via FastAPI and render

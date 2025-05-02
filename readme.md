@@ -71,20 +71,21 @@ This is a complete machine learning pipeline from data ingestion to model deploy
 ```bash
 git clone <repo-url>
 cd <project-folder>
+```
 
 2. **Create a virtual environment**
 ``` bash
 python -m venv venv
 source venv/bin/activate
-
+```
 3. **Install dependencies**
 
 ```bash
 pip install -r requirements.txt
-
+```
 4. **Run the pipeline**
 ``` bash
 python main.py
-
+```
 
 🧪 MLflow Tracking

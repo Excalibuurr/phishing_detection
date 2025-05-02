@@ -33,9 +33,10 @@ app.add_middleware(
 
 templates = Jinja2Templates(directory="./templates")
 
-@app.get("/", tags=["authentication"])
-async def index():
-    return RedirectResponse(url="/docs")
+@app.get("/", tags=["homepage"])
+async def homepage(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
 
 @app.get("/train")
 async def train_route():
@@ -72,7 +73,7 @@ async def predict_route(request: Request, file: UploadFile = File(...)):
 
         # Convert to HTML and return template response
         table_html = result_df.to_html(classes='table table-striped')
-        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
+        return templates.TemplateResponse("table2.html", {"request": request, "table": table_html})
     except Exception as e:
         return Response(f"Prediction failed: {str(e)}", status_code=500)
 

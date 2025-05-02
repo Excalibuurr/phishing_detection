@@ -1,7 +1,7 @@
 # Network Security Phishing Detection Pipeline
 
 ## Project Structure
-phishing_detection/
+```phishing_detection/
 ├── app.py                     # FastAPI application for training and prediction APIs
 ├── main.py                    # Script to run the full pipeline (training and preprocessing)
 ├── predict.py                 # Prediction pipeline logic
@@ -24,7 +24,7 @@ phishing_detection/
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Project documentation
 ├── .env                       # Environment variables (e.g., MLflow tracking URI, MONGODB URI,etc.)
-
+```
 
 ## Project Flowchart
 User Interaction (Frontend)

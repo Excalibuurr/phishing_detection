@@ -88,4 +88,17 @@ pip install -r requirements.txt
 python main.py
 ```
 
-🧪 MLflow Tracking
+## 🧪 MLflow Tracking
+All experiments are tracked using MLflow and DagsHub:
+
+DagsHub MLflow UI
+
+## 🧪 Model Inference
+```bash
+python predict.py
+```
+## 📊 Monitoring & Drift
+Drift report available in drift_report.yaml.
+
+## 📦 Deployment
+Deployment planned via FastAPI 

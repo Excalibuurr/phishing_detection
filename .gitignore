@@ -2,7 +2,7 @@ venv
 .env
 /logs
 __pycache__/
-
+/bins
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

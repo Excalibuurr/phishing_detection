@@ -8,4 +8,6 @@ dagshub
 python-dotenv
 joblib
 fastapi
-# uvicorn/
+uvicorn
+pydantic
+python-multipart

@@ -17,6 +17,8 @@ from sklearn.ensemble import (
 )
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
+from ml.ingestion import ingest_data
+import pandas as pd
 
 def train_model(X_train, X_test, y_train, y_test):
     logger.info("Starting model training")
@@ -37,10 +39,10 @@ def train_model(X_train, X_test, y_train, y_test):
         "DecisionTree": {"criterion": ["gini", "entropy"]},
         "Logistic": {},
     }
-# import dagshub
-# dagshub.init(repo_owner='Excalibuurr', repo_name='phishing_detection', mlflow=True)
+    # import dagshub
+    # dagshub.init(repo_owner='Excalibuurr', repo_name='phishing_detection', mlflow=True)
 
-# Alternatively manually set the tracking URI to DagsHub using .env variables
+    # Alternatively manually set the tracking URI to DagsHub using .env variables
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment("PhishingDetectionExperiment")
 
@@ -74,4 +76,17 @@ def train_model(X_train, X_test, y_train, y_test):
     logger.info(f"Best model ({best_name}) saved to {MODEL_FILE_PATH} with F1={best_score:.4f}")
     logger.info("Model training completed")
 
+    return best_name, best_score
+
+def run_training_pipeline():
+    raw_path, train_path, test_path = ingest_data()
+    train_df = pd.read_csv(train_path)
+    test_df = pd.read_csv(test_path)
+
+    X_train = train_df.drop(columns=[TARGET_COLUMN])
+    y_train = train_df[TARGET_COLUMN]
+    X_test = test_df.drop(columns=[TARGET_COLUMN])
+    y_test = test_df[TARGET_COLUMN]
+
+    best_name, best_score = train_model(X_train, X_test, y_train, y_test)
     return best_name, best_score

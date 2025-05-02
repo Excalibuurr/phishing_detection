@@ -44,7 +44,7 @@ networksecurity_cleaned/
 ```bash
 docker build -t networksec-pipeline .
 docker run --env-file .env networksec-pipeline
-
+```
 
 # 🧠 End-to-End ML Project
 

@@ -69,7 +69,7 @@ phishing_detection/
 1. **Clone the repository**
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Excalibuurr/phishing_detection
 cd phishing_detection
 ```
 
@@ -104,7 +104,10 @@ python main.py
 ```bash
 uvicorn app:app --reload
 ```
-
+Alternatively
+```bash
+python app.py
+```
 Open your browser at `http://localhost:8000` to access the web interface.
 
 ---
@@ -130,7 +133,7 @@ python predict.py
 
 ## MLflow Tracking
 
-All experiments are tracked using MLflow and DagsHub. Access the DagsHub MLflow UI for experiment visualization.
+All experiments are tracked using MLflow and DagsHub. Access the DagsHub [MLflow](https://dagshub.com/Excalibuurr/phishing_detection.mlflow/#/experiments/1?searchFilter=&orderByKey=attributes.start_time&orderByAsc=false&startTime=ALL&lifecycleFilter=Active&modelVersionFilter=All+Runs&datasetsFilter=W10%3D) UI for experiment visualization.
 
 ---
 

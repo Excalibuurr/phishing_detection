@@ -154,5 +154,3 @@ The model is deployed via FastAPI and can be hosted on platforms like Render.
 Specify your project license here.
 
 ---
-
-*Replace `<repo-url>` with your actual repository URL.*

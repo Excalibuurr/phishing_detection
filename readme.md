@@ -1,6 +1,6 @@
 # Network Security Phishing Detection Pipeline 🧠
 
-An end-to-end machine learning project for detecting phishing attacks in network security data. This project includes data ingestion, validation, transformation, model training, prediction, and deployment using FastAPI.
+Development of an End-to-End Machine Learning Framework for Phishing Detection. This project includes data ingestion, validation, transformation, model training, prediction, and deployment using FastAPI.
 
 ---
 
@@ -149,8 +149,3 @@ The model is deployed via FastAPI and can be hosted on platforms like Render.
 
 ---
 
-## License
-
-Specify your project license here.
-
----

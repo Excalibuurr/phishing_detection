@@ -149,8 +149,3 @@ The model is deployed via FastAPI and can be hosted on platforms like Render.
 
 ---
 
-## License
-
-Specify your project license here.
-
----

@@ -17,6 +17,7 @@ from ml.training import train_model
 from ml.transformation import transform_data
 from ml.ingestion import ingest_data
 from ml.validation import validate_data
+from ml.utils import logger
 import pandas as pd
 from predict import predict_new_data
 
@@ -37,18 +38,48 @@ templates = Jinja2Templates(directory="./templates")
 async def homepage(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+from fastapi.responses import HTMLResponse
+@app.get("/drift-report", response_class=HTMLResponse)
+async def get_drift_report():
+    try:
+        with open("drift_report.html", "r") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except FileNotFoundError:
+        return Response("Drift report not found. Run /train first.", status_code=404)
 
 @app.get("/train")
 async def train_route():
     try:
+        logger.info("Starting training pipeline")
         # Run the full pipeline
         raw_path, train_path, test_path = ingest_data()
+        logger.info(f"Data ingested: raw_path={raw_path}, train_path={train_path}, test_path={test_path}")
         drift_report = validate_data()
+        logger.info("Data validation completed")
+        # # Generate the HTML drift report
+        # generate_drift_html_report(train_path, test_path, "drift_report.html")
+        # logger.info("Drift HTML report generated")
         X_train, X_test, y_train, y_test = transform_data()
+        logger.info("Data transformation completed")
         best_name, best_score = train_model(X_train, X_test, y_train, y_test)
+        logger.info(f"Model training completed: best model={best_name}, best score={best_score:.4f}")
 
-        return Response(f"Training is successful. Best model: {best_name} with F1 score: {best_score:.4f}")
+        # Extract drifted features and their p-values
+        drifted_features_info = {
+            col: info["p_value"]
+            for col, info in drift_report.items()
+            if col != "summary" and info["drift"]
+        }
+        drifted_features_str = "\n".join(
+            [f"{feature}: p-value={pval:.4f}" for feature, pval in drifted_features_info.items()])
+
+        logger.info(f"Drifted features: {drifted_features_str}")
+
+        return Response(
+            f"Training is successful. Best model: {best_name} with F1 score: {best_score:.4f}\nDrifted Features:\n{drifted_features_str}"
+        )
     except Exception as e:
+        logger.error(f"Training failed: {str(e)}")
         return Response(f"Training failed: {str(e)}", status_code=500)
 
 @app.post("/predict")

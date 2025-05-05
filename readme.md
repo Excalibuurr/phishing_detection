@@ -142,7 +142,7 @@ All experiments are tracked using MLflow and DagsHub. Access the DagsHub [MLflow
 Drift reports are generated and saved as `data/processed/drift_report.yaml` and `data/processed/drift_summary.yaml`.
 #### Data Drift Detection Results
 
-To ensure the robustness of the deployed model, a data drift analysis was performed between the training and test datasets. Given that all features in the dataset are categorical, the Kolmogorov-Smirnov (KS) test was replaced by the Chi-squared (χ²) test, which is more suitable for discrete categorical data.
+To ensure the robustness of the deployed model, a data drift analysis was performed between the training and test datasets. Given that all features in the dataset are categorical, Chi-squared (χ²) test was performed, which is more suitable for discrete categorical data.
 
 The test revealed statistically significant drift in the following features:
 

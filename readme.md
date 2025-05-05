@@ -139,28 +139,21 @@ All experiments are tracked using MLflow and DagsHub. Access the DagsHub [MLflow
 
 ## Monitoring & Drift Detection
 
-Drift reports are generated and saved as `data/processed/drift_report.yaml`.
+Drift reports are generated and saved as `data/processed/drift_report.yaml` and `data/processed/drift_summary.yaml`.
+#### Data Drift Detection Results
 
----
+To ensure the robustness of the deployed model, a data drift analysis was performed between the training and test datasets. Given that all features in the dataset are categorical, the Kolmogorov-Smirnov (KS) test was replaced by the Chi-squared (χ²) test, which is more suitable for discrete categorical data.
 
-### 📄 **LaTeX Version**
+The test revealed statistically significant drift in the following features:
 
-```latex
-\subsection{Data Drift Detection Results}
+- `PopUpWindow`
+- `Iframe`
 
-To ensure robustness of the deployed model, data drift detection was carried out by comparing the training and test datasets. Since all features in the UCI Phishing Websites dataset are categorical, the Kolmogorov–Smirnov (KS) test was deemed inappropriate. Instead, the Chi-squared ($\chi^2$) test was applied, which is better suited for categorical data.
+The p-values for these features were below the significance threshold of 0.05, indicating a shift in the feature distribution between the training and test datasets.
 
-The test detected significant drift in the following features:
+A summary of the drift detection is provided below:
 
-\begin{itemize}
-  \item \texttt{PopUpWindow}
-  \item \texttt{Iframe}
-\end{itemize}
-
-The corresponding p-values were below the 0.05 significance threshold, confirming distributional shifts between training and test splits.
-
-\noindent Drift summary:
-\begin{verbatim}
+```yaml
 summary:
   total_columns: 10
   drifted_columns: 2
@@ -168,9 +161,6 @@ summary:
   drifted_features:
     - PopUpWindow
     - Iframe
-\end{verbatim}
-
-These shifts could be attributed to evolving web content structures or scraping differences. Regular monitoring and retraining will be essential to maintain model performance in production.
 ```
 
 ---

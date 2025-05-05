@@ -48,11 +48,6 @@ phishing_detection/
    - Trigger training via `/train` API
 
 2. **FastAPI Backend (`app.py`)**
-   - `/predict` route:
-     - Receives CSV file upload
-     - Calls `predict_new_data()` in `predict.py`
-     - Loads model and preprocessor
-     - Preprocesses input data and returns predictions as HTML table
    - `/train` route:
      - Runs full pipeline:
        - Data ingestion (`ingestion.py`)
@@ -61,6 +56,11 @@ phishing_detection/
        - Model training (`training.py`)
      - Saves model and preprocessor
      - Returns training status and best model info
+   - `/predict` route:
+     - Receives CSV file upload
+     - Calls `predict_new_data()` in `predict.py`
+     - Loads model and preprocessor
+     - Preprocesses input data and returns predictions as HTML table
 
 ---
 

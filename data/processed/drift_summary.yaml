@@ -1,0 +1,6 @@
+drift_detected: true
+drifted_columns: 2
+drifted_features:
+- popUpWidnow
+- Iframe
+total_columns: 31

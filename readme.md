@@ -143,6 +143,38 @@ Drift reports are generated and saved as `data/processed/drift_report.yaml`.
 
 ---
 
+### 📄 **LaTeX Version**
+
+```latex
+\subsection{Data Drift Detection Results}
+
+To ensure robustness of the deployed model, data drift detection was carried out by comparing the training and test datasets. Since all features in the UCI Phishing Websites dataset are categorical, the Kolmogorov–Smirnov (KS) test was deemed inappropriate. Instead, the Chi-squared ($\chi^2$) test was applied, which is better suited for categorical data.
+
+The test detected significant drift in the following features:
+
+\begin{itemize}
+  \item \texttt{PopUpWindow}
+  \item \texttt{Iframe}
+\end{itemize}
+
+The corresponding p-values were below the 0.05 significance threshold, confirming distributional shifts between training and test splits.
+
+\noindent Drift summary:
+\begin{verbatim}
+summary:
+  total_columns: 10
+  drifted_columns: 2
+  drift_detected: true
+  drifted_features:
+    - PopUpWindow
+    - Iframe
+\end{verbatim}
+
+These shifts could be attributed to evolving web content structures or scraping differences. Regular monitoring and retraining will be essential to maintain model performance in production.
+```
+
+---
+
 ## Deployment
 
 The model is deployed via FastAPI and can be hosted on platforms like Render.

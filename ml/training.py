@@ -23,7 +23,9 @@ import pandas as pd
 def train_model(X_train, X_test, y_train, y_test):
     logger.info("Starting model training")
     # Load preprocessor (to register alongside model)
+    logger.info(f"Loading preprocessor from {PREPROCESSOR_PATH}")
     preprocessor = load_object(PREPROCESSOR_PATH)
+    logger.info("Preprocessor loaded successfully")
 
     models = {
         "RandomForest": RandomForestClassifier(random_state=42),
@@ -47,13 +49,16 @@ def train_model(X_train, X_test, y_train, y_test):
     mlflow.set_experiment("PhishingDetectionExperiment")
 
     best_name, best_model, best_score = None, None, -1
+    logger.info("Evaluating models")
     report = evaluate_models(X_train, y_train, X_test, y_test, models, params)
+    logger.info("Model evaluation completed")
 
     for name, info in report.items():
         f1 = info["f1_score"]
         precision = info["precision"]
         recall = info["recall"]       
         model = info["model"]
+        logger.info(f"Logging metrics for model {name}: F1={f1:.4f}, Precision={precision:.4f}, Recall={recall:.4f}")
         with mlflow.start_run(run_name=name):
             mlflow.log_param("model", name)
             mlflow.log_metric("f1_score", f1)
@@ -64,6 +69,7 @@ def train_model(X_train, X_test, y_train, y_test):
             best_score, best_model, best_name = f1, model, name
 
     # Save best model locally and log to MLflow
+    logger.info(f"Saving best model {best_name} locally and logging to MLflow")
     os.makedirs(MODEL_DIR, exist_ok=True)
     import shutil
     with mlflow.start_run(run_name="BestModel_" + best_name):

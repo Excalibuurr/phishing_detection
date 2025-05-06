@@ -16,7 +16,7 @@ This repository contains a complete ML pipeline that takes raw data, processes i
 phishing_detection/
 ├── app.py                     # FastAPI app for training and prediction APIs
 ├── main.py                    # Script to run the full pipeline (training and preprocessing)
-pipeline
+pipeline/
 ├── prediction_pipeline.py     # Prediction pipeline logic
 ├── training_pipeline          # training pipeline logic
 ├── templates/                 # HTML templates for web interface

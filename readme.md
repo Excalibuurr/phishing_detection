@@ -17,8 +17,8 @@ phishing_detection/
 ├── app.py                     # FastAPI app for training and prediction APIs
 ├── main.py                    # Script to run the full pipeline (training and preprocessing)
 ├──pipeline/
-├── prediction_pipeline.py     # Prediction pipeline logic
-├── training_pipeline          # training pipeline logic
+    ├── prediction_pipeline.py # Prediction pipeline logic
+    ├── training_pipeline      # training pipeline logic
 ├── templates/                 # HTML templates for web interface
 │   ├── index.html             # Upload CSV and trigger prediction
 │   ├── table.html             # Display prediction results

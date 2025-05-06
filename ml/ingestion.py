@@ -31,7 +31,7 @@ def ingest_data():
 
     # split
     train_set, test_set = train_test_split(
-        df, test_size=TRAIN_FILE_PATH and TRAIN_TEST_SPLIT_RATIO, random_state=42
+        df, test_size=TRAIN_TEST_SPLIT_RATIO, random_state=42
     )
     # save splits
     os.makedirs(os.path.dirname(TRAIN_FILE_PATH), exist_ok=True)

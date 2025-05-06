@@ -14,11 +14,11 @@ def setup_logger():
     log_dir = os.path.dirname(LOG_FILE_PATH)
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f"log_{timestamp}.txt")
+    log_file = os.path.join(log_dir, f"log_{timestamp}.log")
     logging.basicConfig(
         filename=log_file,
         level=logging.INFO,
-        format="[%(asctime)s] %(levelname)s - %(message)s",
+        format="[%(asctime)s] %(levelname)s - %(filename)s - %(message)s",
     )
     return logging.getLogger()
 

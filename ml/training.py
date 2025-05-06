@@ -73,3 +73,21 @@ def train_model(X_train, X_test, y_train, y_test):
     logger.info("Model training completed")
 
     return best_name, best_score
+
+# if __name__ == "__main__":
+    # # Ingest data
+    # logger.info("Ingesting data")
+    # df = ingest_data()
+    # logger.info("Data ingestion completed")
+
+    # # Split data into features and target
+    # X = df.drop(columns=[TARGET_COLUMN])
+    # y = df[TARGET_COLUMN]
+
+    # # Train-test split
+    # from sklearn.model_selection import train_test_split
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # # Train model
+    # best_model_name, best_model_score = train_model(X_train, X_test, y_train, y_test)
+    # logger.info(f"Best model: {best_model_name} with F1 score: {best_model_score:.4f}")  

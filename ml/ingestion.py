@@ -41,3 +41,9 @@ def ingest_data():
     logger.info("Data ingestion completed")
 
     return RAW_FILE_PATH, TRAIN_FILE_PATH, TEST_FILE_PATH
+
+# if __name__ == "__main__":
+#     # Ingest data
+#     logger.info("Ingesting data")
+#     ingest_data()
+#     logger.info("Data ingestion completed")

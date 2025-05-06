@@ -44,3 +44,23 @@ MLFLOW_TRACKING_PASSWORD = os.getenv("MLFLOW_TRACKING_PASSWORD")
 
 # valid file path
 VALID_FILE_PATH = os.path.join(BASE_DIR, "valid_data", "test.csv")
+
+# model_configs
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+MODEL_DEFINITIONS = {
+    "RandomForest": RandomForestClassifier(random_state=42),
+    "DecisionTree": DecisionTreeClassifier(),
+    "GradientBoost": GradientBoostingClassifier(random_state=42),
+    "Logistic": LogisticRegression(max_iter=500),
+    "AdaBoost": AdaBoostClassifier(random_state=42),
+}
+
+MODEL_PARAMS = {
+    "RandomForest": {"n_estimators": [16, 32, 64]},
+    "GradientBoost": {"learning_rate": [0.1, 0.01], "n_estimators": [16, 32]},
+    "AdaBoost": {"learning_rate": [0.1, 0.01], "n_estimators": [16, 32]},
+    "DecisionTree": {"criterion": ["gini", "entropy"]},
+    "Logistic": {},
+}

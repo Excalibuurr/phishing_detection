@@ -19,7 +19,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from ml.ingestion import ingest_data
 import pandas as pd
-
+from ml.config import MODEL_DEFINITIONS,MODEL_PARAMS
 def train_model(X_train, X_test, y_train, y_test):
     logger.info("Starting model training")
     # Load preprocessor (to register alongside model)
@@ -27,20 +27,9 @@ def train_model(X_train, X_test, y_train, y_test):
     preprocessor = load_object(PREPROCESSOR_PATH)
     logger.info("Preprocessor loaded successfully")
 
-    models = {
-        "RandomForest": RandomForestClassifier(random_state=42),
-        "DecisionTree":  DecisionTreeClassifier(),
-        "GradientBoost": GradientBoostingClassifier(random_state=42),
-        "Logistic":      LogisticRegression(max_iter=500),
-        "AdaBoost":      AdaBoostClassifier(random_state=42),
-    }
-    params = {
-        "RandomForest": {"n_estimators": [16, 32, 64]},
-        "GradientBoost": {"learning_rate": [0.1, 0.01], "n_estimators": [16, 32]},
-        "AdaBoost": {"learning_rate": [0.1, 0.01], "n_estimators": [16, 32]},
-        "DecisionTree": {"criterion": ["gini", "entropy"]},
-        "Logistic": {},
-    }
+    models = MODEL_DEFINITIONS
+    params = MODEL_PARAMS
+    logger.info("Model definitions and parameters loaded successfully")
     # import dagshub
     # dagshub.init(repo_owner='Excalibuurr', repo_name='phishing_detection', mlflow=True)
 

@@ -50,12 +50,12 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier,
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 MODEL_DEFINITIONS = {
-    "RandomForest": RandomForestClassifier(random_state=42),
-    "DecisionTree": DecisionTreeClassifier(),
-    "GradientBoost": GradientBoostingClassifier(random_state=42),
-    "Logistic": LogisticRegression(max_iter=500),
-    "AdaBoost": AdaBoostClassifier(random_state=42),
-}
+                "Random Forest": RandomForestClassifier(verbose=1),
+                "Decision Tree": DecisionTreeClassifier(),
+                "Gradient Boosting": GradientBoostingClassifier(verbose=1),
+                "Logistic Regression": LogisticRegression(verbose=1),
+                "AdaBoost": AdaBoostClassifier(),
+            }
 
 MODEL_PARAMS = {
             "Decision Tree": {

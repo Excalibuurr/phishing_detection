@@ -16,7 +16,9 @@ This repository contains a complete ML pipeline that takes raw data, processes i
 phishing_detection/
 ├── app.py                     # FastAPI app for training and prediction APIs
 ├── main.py                    # Script to run the full pipeline (training and preprocessing)
-├── predict.py                 # Prediction pipeline logic
+pipeline
+├── prediction_pipeline.py     # Prediction pipeline logic
+├── training_pipeline          # training pipeline logic
 ├── templates/                 # HTML templates for web interface
 │   ├── index.html             # Upload CSV and trigger prediction
 │   ├── table.html             # Display prediction results
@@ -32,10 +34,14 @@ phishing_detection/
 ├── data/                      # Raw and processed data
 │   ├── raw/
 │   ├── processed/
+         ├──drift_report.yaml  # drift report
+         ├──drif_summary.yaml  # drift summary 
+         ├──train.csv
+         ├──test.csv
 ├── config/                    # Configuration files
 │   ├── schema.yaml
 ├── requirements.txt           # Python dependencies
-├── .env                      # Environment variables (MLflow, MongoDB URIs, etc.)
+├── .env                       # Environment variables (MLflow, MongoDB URIs, etc.)
 ```
 
 ---
@@ -44,10 +50,10 @@ phishing_detection/
 
 1. **User Interaction (Frontend)**
    - Upload CSV file via web interface (`index.html`)
-   - Trigger prediction via `/predict` API
    - Trigger training via `/train` API
+   - Trigger prediction via `/predict` API
 
-2. **FastAPI Backend (`app.py`)**
+3. **FastAPI Backend (`app.py`)**
    - `/train` route:
      - Runs full pipeline:
        - Data ingestion (`ingestion.py`)
@@ -58,7 +64,7 @@ phishing_detection/
      - Returns training status and best model info
    - `/predict` route:
      - Receives CSV file upload
-     - Calls `predict_new_data()` in `predict.py`
+     - Calls `predict_from_csv()` in `prediction_pipeline.py`
      - Loads model and preprocessor
      - Preprocesses input data and returns predictions as HTML table
 

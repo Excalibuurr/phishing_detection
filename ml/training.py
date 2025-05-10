@@ -42,6 +42,10 @@ def train_model(X_train, X_test, y_train, y_test):
     report = evaluate_models(X_train, y_train, X_test, y_test, models, params)
     logger.info("Model evaluation completed")
 
+    if not report:
+        logger.error("Model evaluation report is empty. No models were trained.")
+        raise ValueError("Training failed: No valid model was trained.")
+
     for name, info in report.items():
         f1 = info["f1_score"]
         precision = info["precision"]

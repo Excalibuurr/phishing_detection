@@ -57,6 +57,10 @@ def train_model(X_train, X_test, y_train, y_test):
         if f1 > best_score:
             best_score, best_model, best_name = f1, model, name
 
+    if best_name is None or best_model is None:
+        logger.error("No valid model was trained. Please check your data and model definitions.")
+        raise ValueError("Training failed: No valid model was trained.")
+
     # Save best model locally and log to MLflow
     logger.info(f"Saving best model {best_name} locally and logging to MLflow")
     os.makedirs(MODEL_DIR, exist_ok=True)
@@ -75,19 +79,22 @@ def train_model(X_train, X_test, y_train, y_test):
     return best_name, best_score
 
 # if __name__ == "__main__":
-    # # Ingest data
-    # logger.info("Ingesting data")
-    # df = ingest_data()
-    # logger.info("Data ingestion completed")
+#     # Ingest data
+#     logger.info("Ingesting data")
+#     _, train_path, _ = ingest_data()
+#     logger.info("Data ingestion completed")
 
-    # # Split data into features and target
-    # X = df.drop(columns=[TARGET_COLUMN])
-    # y = df[TARGET_COLUMN]
+#     # Load train data as DataFrame
+#     df = pd.read_csv(train_path)
 
-    # # Train-test split
-    # from sklearn.model_selection import train_test_split
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+#     # Split data into features and target
+#     X = df.drop(columns=[TARGET_COLUMN])
+#     y = df[TARGET_COLUMN]
 
-    # # Train model
-    # best_model_name, best_model_score = train_model(X_train, X_test, y_train, y_test)
-    # logger.info(f"Best model: {best_model_name} with F1 score: {best_model_score:.4f}")  
+#     # Train-test split
+#     from sklearn.model_selection import train_test_split
+#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#     # Train model
+#     best_model_name, best_model_score = train_model(X_train, X_test, y_train, y_test)
+#     logger.info(f"Best model: {best_model_name} with F1 score: {best_model_score:.4f}")

@@ -44,6 +44,9 @@ async def train_route():
             f"Training successful!\nModel: {result['model']}\nF1 Score: {result['f1_score']:.4f}\nDrifted Features:\n{drift_str}"
         )
     except Exception as e:
+        import traceback
+        tb_str = traceback.format_exc()
+        logger.error(f"Training failed with exception: {str(e)}\nTraceback:\n{tb_str}")
         return Response(f"Training failed: {str(e)}", status_code=500)
 
 

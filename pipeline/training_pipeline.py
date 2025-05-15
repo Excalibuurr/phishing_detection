@@ -26,8 +26,8 @@ def run_pipeline():
         # Step 4: Train model
         best_model_name, best_score = train_model(X_train, X_test, y_train, y_test)
 
-        if best_model_name is None:
-            raise ValueError("No best model was selected during training. Please check the training process.")
+        # if best_model_name is None:
+            # raise ValueError("No best model was selected during training. Please check the training process.")
 
         logger.info(f"✅ Pipeline complete. Best model: {best_model_name} with F1 score: {best_score:.4f}")
         

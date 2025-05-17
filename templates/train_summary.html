@@ -8,8 +8,33 @@
     <div class="container py-5">
         <h2 class="mb-4">🚀 Training Summary</h2>
         <div class="mb-3">
-            <strong>Best Model:</strong> {{ model }}<br>
-            <strong>F1 Score:</strong> {{ f1_score }}
+            <strong>Best Model:</strong> {{ best_model_name }}<br>
+            <strong>F1 Score:</strong> {{ best_f1_score }}
+        </div>
+        <div class="mb-3">
+            <h4>All Model Scores</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>F1 Score</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>AUC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model in models_metrics %}
+                    <tr {% if model.Model == best_model_name %}class="table-success"{% endif %}>
+                        <td>{{ model.Model }}</td>
+                        <td>{{ "%.4f"|format(model["F1 Score"]) }}</td>
+                        <td>{{ "%.4f"|format(model.Precision) }}</td>
+                        <td>{{ "%.4f"|format(model.Recall) }}</td>
+                        <td>{{ "%.4f"|format(model.AUC) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div class="mb-3">
             <strong>Drifted Features:</strong>

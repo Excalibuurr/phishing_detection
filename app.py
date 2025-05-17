@@ -47,6 +47,7 @@ async def train_route():
         import traceback
         tb_str = traceback.format_exc()
         logger.error(f"Training failed with exception: {str(e)}\nTraceback:\n{tb_str}")
+        print(f"Training failed with exception: {str(e)}\nTraceback:\n{tb_str}")
         return Response(f"Training failed: {str(e)}", status_code=500)
 
 
